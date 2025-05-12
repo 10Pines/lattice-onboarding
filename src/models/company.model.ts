@@ -10,7 +10,7 @@ export class Company {
   @Field(type => String)
   name: string;
 
-  @Field(type => [Employee], { nullable: 'items' })
+  @Field(type => [Employee], { nullable: 'itemsAndList' })
   employees: Employee[];
 
 }
