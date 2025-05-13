@@ -16,7 +16,7 @@ export class CompanyService {
     private tenPinesEmployees: Employee[] = [
     { id: 1, firstName: 'Nahuel', lastName: 'Varisco', status: Status.ACTIVE },
     { id: 2, firstName: 'Nayla', lastName: 'Portas', status: Status.CREATED },
-    { id: 3, firstName: 'Belén', lastName: 'Amat', status: Status.INVITED },
+    { id: 3, firstName: 'Belén', lastName: 'Amat', status: Status.CREATED },
     { id: 4, firstName: 'Santiago', lastName: 'Paredes', status: Status.INACTIVE }];
 
     private companies: Company[] = [
