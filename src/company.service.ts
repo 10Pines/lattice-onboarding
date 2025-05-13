@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Company } from "src/models/company.model";
-import { Employee, Status } from "src/models/employee.model";
+import { Company } from "./models/company.model";
+import { Employee, Status } from "./models/employee.model";
 
 @Injectable()
 export class CompanyService {

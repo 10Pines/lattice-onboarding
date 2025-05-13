@@ -1,7 +1,7 @@
 import { Args, Int, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { Company } from "src/models/company.model";
-import { Employee, Status } from "src/models/employee.model";
-import { CompanyService } from "src/company.service";
+import { Employee, Status } from "./models/employee.model";
+import { CompanyService } from "./company.service";
+import { Company } from "./models/company.model";
 
 @Resolver(() => Company)
 export class CompanyResolver {
