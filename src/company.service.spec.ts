@@ -49,4 +49,33 @@ describe('CompanyService', () => {
       );
     });
   });
+
+  describe('updateEmployeeStatus', () => {
+    it('should update the status of an employee from ACTIVE to INACTIVE', async () => {
+      const employee = await service.updateEmployeeStatus(1, Status.INACTIVE);
+      expect(employee).toBeDefined();
+      expect(employee.status).toBe(Status.INACTIVE);
+    });
+
+    it('should throw an error if the employee is not found', async () => {
+      await expect(service.updateEmployeeStatus(999, Status.ACTIVE)).rejects.toThrow(
+        'Employee with id 999 not found',
+      );
+    });
+
+    it('should throw an error if the current update is INACTIVE to CREATED', async () => {
+      await expect(service.updateEmployeeStatus(4, Status.CREATED)).rejects.toThrow(
+        'Cannot change status from INACTIVE to CREATED',
+      );
+    });
+
+    it('should throw an error if the current update is INACTIVE to INVITED', async () => {
+      await expect(service.updateEmployeeStatus(4, Status.INVITED)).rejects.toThrow(
+        'Cannot change status from INACTIVE to INVITED',
+      );
+    });
+  });
 });
+
+    
+

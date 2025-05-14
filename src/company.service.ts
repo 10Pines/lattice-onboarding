@@ -14,10 +14,10 @@ export class CompanyService {
     { id: 5, firstName: 'Charlie', lastName: 'Davis', status: Status.ACTIVE },];
 
     private tenPinesEmployees: Employee[] = [
-    { id: 1, firstName: 'Nahuel', lastName: 'Varisco', status: Status.ACTIVE },
-    { id: 2, firstName: 'Nayla', lastName: 'Portas', status: Status.CREATED },
-    { id: 3, firstName: 'Belén', lastName: 'Amat', status: Status.CREATED },
-    { id: 4, firstName: 'Santiago', lastName: 'Paredes', status: Status.INACTIVE }];
+    { id: 6, firstName: 'Nahuel', lastName: 'Varisco', status: Status.ACTIVE },
+    { id: 7, firstName: 'Nayla', lastName: 'Portas', status: Status.CREATED },
+    { id: 8, firstName: 'Belén', lastName: 'Amat', status: Status.CREATED },
+    { id: 9, firstName: 'Santiago', lastName: 'Paredes', status: Status.INACTIVE }];
 
     private companies: Company[] = [
     { id: 1, name: '10pines', employees: this.tenPinesEmployees},
@@ -41,6 +41,19 @@ export class CompanyService {
             throw new Error(`Company with id ${companyId} not found`);
         }
         return company.employees.filter(employee => employee.status === status);
+    }
+
+    async updateEmployeeStatus(employeeId: number, status: Status) {
+        const allEmployees = [...this.googleEmployees, ...this.tenPinesEmployees];
+        const employee = allEmployees.find(employee => employee.id === employeeId);
+        if (!employee) {
+            throw new Error(`Employee with id ${employeeId} not found`);
+        }
+        if (employee.status === Status.INACTIVE && status !== Status.ACTIVE) {
+            throw new Error(`Cannot change status from INACTIVE to ${status.toUpperCase()}`);
+        }
+        employee.status = status;
+        return employee;
     }
 
 }

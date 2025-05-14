@@ -1,4 +1,4 @@
-import { Args, Int, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { Employee, Status } from "./models/employee.model";
 import { CompanyService } from "./company.service";
 import { Company } from "./models/company.model";
@@ -28,6 +28,13 @@ export class CompanyResolver {
       return this.companyService.findEmployeesByStatus(company.id, status);
     }
     return company.employees;
+  }
+
+  @Mutation(() => Employee)
+  async updateEmployeeStatus(
+    @Args('employeeId', { type: () => Int }) employeeId: number,
+    @Args('status', { type: () => Status }) status: Status) {
+    return this.companyService.updateEmployeeStatus(employeeId, status);
   }
 
 }
