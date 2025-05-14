@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Company } from "./models/company.model";
-import { Employee, Status } from "./models/employee.model";
+import { Company } from "../models/company.model";
+import { Employee, Status } from "../models/employee.model";
 import { DbClient } from "./db.client";
 
 
@@ -27,17 +27,4 @@ export class CompanyService {
         }
         return company.employees.filter(employee => employee.status === status);
     }
-
-    async updateEmployeeStatus(employeeId: number, status: Status) {
-        const employee = this.dbClient.employees.find(employee => employee.id === employeeId);
-        if (!employee) {
-            throw new Error(`Employee with id ${employeeId} not found`);
-        }
-        if (employee.status === Status.INACTIVE && status !== Status.ACTIVE) {
-            throw new Error(`Cannot change status from INACTIVE to ${status.toUpperCase()}`);
-        }
-        employee.status = status;
-        return employee;
-    }
-
 }

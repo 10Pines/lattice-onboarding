@@ -2,8 +2,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { CompanyResolver } from './company.resolver';
-import { CompanyService } from './company.service';
+import { CompanyResolver } from './resolvers/company.resolver';
+import { CompanyService } from './services/company.service';
+import { EmployeeService } from './services/employee.service';
+import { DbClient } from './services/db.client';
 
 @Module({
   imports: [
@@ -13,6 +15,6 @@ import { CompanyService } from './company.service';
        autoSchemaFile: true, // Para generar el esquema automáticamente en memoria
     }),
   ],
-  providers: [CompanyResolver, CompanyService],
+  providers: [CompanyResolver, CompanyService, EmployeeService, DbClient],
 })
 export class AppModule {}

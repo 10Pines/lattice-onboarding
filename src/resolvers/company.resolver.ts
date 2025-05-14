@@ -1,12 +1,14 @@
 import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { Employee, Status } from "./models/employee.model";
-import { CompanyService } from "./company.service";
-import { Company } from "./models/company.model";
+import { Employee, Status } from "../models/employee.model";
+import { CompanyService } from "../services/company.service";
+import { Company } from "../models/company.model";
+import { EmployeeService } from "../services/employee.service";
 
 @Resolver(() => Company)
 export class CompanyResolver {
   constructor(
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private employeeService: EmployeeService,
   ) {}
 
   @Query(() => Company)
@@ -34,7 +36,6 @@ export class CompanyResolver {
   async updateEmployeeStatus(
     @Args('employeeId', { type: () => Int }) employeeId: number,
     @Args('status', { type: () => Status }) status: Status) {
-    return this.companyService.updateEmployeeStatus(employeeId, status);
+    return this.employeeService.updateStatus(employeeId, status);
   }
-
 }
